@@ -57,7 +57,7 @@ class BirdPlayer(pygame.sprite.Sprite):
 
     def flap(self):
         if self.pos_y > -2.0 * self.image.get_height():
-            self.vel = 0.0
+            self.vel = -8.0
             self.flapped = True
 
     def update(self, dt):
@@ -82,6 +82,7 @@ class BirdPlayer(pygame.sprite.Sprite):
         if self.thrust_time + dt <= (1.0 / 30.0) and self.flapped:
             self.thrust_time += dt
             self.vel += -1.0 * self.FLAP_POWER
+            self.vel = max(-8.0, self.vel)
         else:
             self.thrust_time = 0.0
             self.flapped = False
